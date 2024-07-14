@@ -12,7 +12,7 @@ def callback(frame: av.VideoFrame) -> av.VideoFrame:
   img = frame.to_ndarray(format="bgr24")
   return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-webrtc_ctx = webrtc_streamer(
+webrtc_streamer(
     key="object-detection",
     mode=WebRtcMode.SENDRECV,
     rtc_configuration={
