@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_webrtc import WebRtcMode, webrtc_streamer
+from ultralytics import YOLO
 import av
 import cv2
 
