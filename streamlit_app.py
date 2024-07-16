@@ -60,7 +60,7 @@ def callback(frame: av.VideoFrame) -> av.VideoFrame:
             break
         track_id = track.track_id
         bbox = track.to_ltrb()
-        cv2.putText(img, "ID: " + str(track_id), (int(bbox[0]), int(bbox[1])), cv.FONT_HERSHEY_SIMPLEX, 1,
+        cv2.putText(img, "ID: " + str(track_id), (int(bbox[0]), int(bbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 1,
                     (200,0, 0), 6)
 
 
@@ -90,8 +90,8 @@ def draw_Box(data,image,name):
     x1,y1,x2,y2,conf,id = data
     p1 = (int(x1),int(y1))
     p2 = (int(x2),int(y2))
-    cv.rectangle(image,p1,p2,(0,0,255),1)
-    cv.putText(image,name,p1, cv.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 2)
+    cv2.rectangle(image,p1,p2,(0,0,255),1)
+    cv2.putText(image,name,p1, cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 2)
 
     return image
 
