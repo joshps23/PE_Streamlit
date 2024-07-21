@@ -2,8 +2,6 @@ FROM python:3.11.5 AS stage-one
 EXPOSE 8501
 WORKDIR /app
 
-
-
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 COPY requirements.txt ./requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
