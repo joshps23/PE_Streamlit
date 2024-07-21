@@ -63,30 +63,30 @@ def callback(frame: av.VideoFrame) -> av.VideoFrame:
     #     # yield img
     # return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-        for result in results:
-            detections = []
-            names = result.names
+    for result in results:
+        detections = []
+        names = result.names
 
-            for data in result.boxes.data.tolist():
-                x1,y1, x2,y2, conf, id = data
-                name=names[id]
-                detections.append(data)
-                img = draw_Box(data,img,name)
-                details = get_details(result,img)
-                tracks = object_tracker.update_tracks(details, frame=img)
+        for data in result.boxes.data.tolist():
+            x1,y1, x2,y2, conf, id = data
+            name=names[id]
+            detections.append(data)
+            img = draw_Box(data,img,name)
+            details = get_details(result,img)
+            tracks = object_tracker.update_tracks(details, frame=img)
 
-                for track in tracks:
-                    if not track.is_confirmed():
-                        break
-                    track_id = track.track_id
-                    bbox = track.to_ltrb()
-                    cv2.putText(img, "ID: " + str(track_id),
-                    (int(bbox[0]), int(bbox[1])),
-                    cv2.FONT_HERSHEY_SIMPLEX,1,
-                    (0,0,255), 6)
-            
-            
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
+            for track in tracks:
+                if not track.is_confirmed():
+                    break
+                track_id = track.track_id
+                bbox = track.to_ltrb()
+                cv2.putText(img, "ID: " + str(track_id),
+                (int(bbox[0]), int(bbox[1])),
+                cv2.FONT_HERSHEY_SIMPLEX,1,
+                (0,0,255), 6)
+        
+        
+    return av.VideoFrame.from_ndarray(img, format="bgr24")
 
 def draw_Box(data,image,name):
     x1,y1,x2,y2,conf,id = data
